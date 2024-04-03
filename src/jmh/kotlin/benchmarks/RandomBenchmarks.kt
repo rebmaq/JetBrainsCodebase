@@ -23,7 +23,8 @@ open class SmallCommonDynamicConnectivityRandomBenchmark {
     @Param
     open var dcpConstructor: DCPConstructor = DCPConstructor.values()[0]
 
-    @Param("1", "2", "4", "8", "16", "32", "64", "128", "144")
+    /*@Param("1", "2", "4", "8", "16", "32", "64", "128", "144")*/
+    @Param("48")
     open var workers: Int = 0
 
     @Param("4", "99")
@@ -71,7 +72,8 @@ open class SmallLockElisionDynamicConnectivityRandomBenchmark {
     @Param
     open var dcpConstructor: LockElisionDCPConstructor = LockElisionDCPConstructor.values()[0]
 
-    @Param("1", "2", "4", "8", "16", "32", "64", "128", "144")
+    /*@Param("1", "2", "4", "8", "16", "32", "64", "128", "144")*/
+    @Param("48")
     open var workers: Int = 0
 
     @Param("4", "99")

@@ -27,14 +27,14 @@ private lateinit var TWITTER_GRAPH: Graph
 private lateinit var STANFORD_WEB_GRAPH: Graph
 
 enum class GraphParams : Serializable {
-    RANDOM_NLOG,
+    /*RANDOM_NLOG,
     USA_ROADS,
     RANDOM_N,
     RANDOM_2N,
-    RANDOM_NSQRT,
+    RANDOM_NSQRT,*/
     TWITTER,
-    STANFORD_WEB,
-    RANDOM_DIVIDED
+    STANFORD_WEB/*,*/
+    //RANDOM_DIVIDED
 }
 
 fun loadGraph(params: Triple<String, String, String>): Graph {
@@ -54,7 +54,7 @@ interface GraphServerInterface : Remote {
 
 class GraphServer : UnicastRemoteObject(), GraphServerInterface {
     override fun graphByParams(params: GraphParams) = when (params) {
-        GraphParams.RANDOM_DIVIDED -> {
+/*        GraphParams.RANDOM_DIVIDED -> {
             if (!::RANDOM_DIVIDED_GRAPH.isInitialized)
                 RANDOM_DIVIDED_GRAPH = loadGraph(RANDOM_DIVIDED_GRAPH_PARAMS)
             RANDOM_DIVIDED_GRAPH
@@ -83,7 +83,7 @@ class GraphServer : UnicastRemoteObject(), GraphServerInterface {
             if (!::RANDOM_NSQRT_GRAPH.isInitialized)
                 RANDOM_NSQRT_GRAPH = loadGraph(RANDOM_NSQRT_GRAPH_PARAMS)
             RANDOM_NSQRT_GRAPH
-        }
+        }*/
         GraphParams.TWITTER -> {
             if (!::TWITTER_GRAPH.isInitialized)
                 TWITTER_GRAPH = loadGraph(TWITTER_GRAPH_PARAMS)
