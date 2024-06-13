@@ -85,10 +85,16 @@ fun downloadOrCreateAndParseGraph(name: String, type: String, url: String): Grap
             println("Downloaded $graphFile")
         }
     }
+    
+    println("supsup") // EXECUTES BEYOND THIS POINT
     val graph =  when {
         ext.startsWith("rand") || ext == "gr" -> parseGrFile(graphFile, gz)
         ext == "txt" -> parseTxtFile(graphFile, gz)
         ext == "graph" -> parseGraphFile(graphFile, bz2)
+        ext == "kron" -> {
+            println("in kron now")
+            println("$graphFile, $gz")
+            parseGrFile(graphFile, gz)}
         else -> error("Unknown graph type: $ext")
     }
     check(graph.nodes <= (1 shl MAX_BITS_PER_NODE)) { "The maximum number of vertices in a graph should not be greater than 2^${MAX_BITS_PER_NODE}" }
@@ -143,12 +149,17 @@ fun parseGrFile(filename: String, gziped: Boolean): Graph {
                 val parts = line.split(' ')
                 val from = parts[1].toInt() - 1
                 val to = parts[2].toInt() - 1
+                if (from > 8192 || to > 8192) {
+                    print("${from}, ${to}")
+                    println(parts)
+                }
                 edges.add(bidirectionalEdge(from, to))
             }
         }
     }
     }
-    edges.shuffle()
+    // edges.shuffle() 
+    // CHECK WHEN EDGES BECOME SCREWED UP TODO
     return Graph(nodes!!, edges.toLongArray())
 }
 

@@ -22,7 +22,8 @@ open class SmallCommonDynamicConnectivityIncrementalBenchmark {
     open var dcpConstructor: DCPForModificationsConstructor = DCPForModificationsConstructor.values()[0]
 
     /*@Param("1", "2", "4", "8", "16", "32", "64", "128", "144")*/
-    @Param("48")
+    // @Param("48")
+    @Param("1")
     open var workers: Int = 0
 
     @Benchmark
@@ -66,7 +67,8 @@ open class SmallLockElisionDynamicConnectivityIncrementalBenchmark {
     open var dcpConstructor: LockElisionDCPForModificationsConstructor = LockElisionDCPForModificationsConstructor.values()[0]
 
     /*@Param("1", "2", "4", "8", "16", "32", "64", "128", "144")*/
-    @Param("48")
+    // @Param("48")
+    @Param("1")
     open var workers: Int = 0
 
     @Benchmark

@@ -23,6 +23,7 @@ open class SmallCommonDynamicConnectivityDecrementalBenchmark {
 
     /*@Param("1", "2", "4", "8", "16", "32", "64", "128", "144")*/
     @Param("48")
+    // @Param("1")
     open var workers: Int = 0
 
     @Benchmark
@@ -68,6 +69,7 @@ open class SmallLockElisionDynamicConnectivityDecrementalBenchmark {
 
     /*@Param("1", "2", "4", "8", "16", "32", "64", "128", "144")*/
     @Param("48")
+    // @Param("1")
     open var workers: Int = 0
 
     @Benchmark

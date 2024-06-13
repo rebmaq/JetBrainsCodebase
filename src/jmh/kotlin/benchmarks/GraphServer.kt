@@ -16,6 +16,8 @@ val RANDOM_NSQRT_GRAPH_PARAMS = Triple("RANDOM-NSQRT", "rand", "20000 1600000")
 val RANDOM_DIVIDED_GRAPH_PARAMS = Triple("RANDOM-DIVIDED", "rand_divided", "10 10000 160000")
 val TWITTER_GRAPH_PARAMS = Triple("TWITTER", "txt gz", "http://snap.stanford.edu/data/twitter_combined.txt.gz")
 val STANFORD_WEB_GRAPH_PARAMS = Triple("STANFORD-WEB", "txt gz", "http://snap.stanford.edu/data/web-Stanford.txt.gz")
+val KRON_13_GRAPH_PARAMS = Triple("KRON-13", "kron", "")
+// val KRON_15_GRAPH_PARAMS = Triple("KRON-15", "kron", "")
 
 private lateinit var USA_ROADS_GRAPH: Graph
 private lateinit var RANDOM_N_GRAPH: Graph
@@ -25,16 +27,20 @@ private lateinit var RANDOM_NSQRT_GRAPH: Graph
 private lateinit var RANDOM_DIVIDED_GRAPH: Graph
 private lateinit var TWITTER_GRAPH: Graph
 private lateinit var STANFORD_WEB_GRAPH: Graph
+private lateinit var KRON_13_GRAPH: Graph
+// private lateinit var KRON_15_GRAPH: Graph
 
 enum class GraphParams : Serializable {
-    /*RANDOM_NLOG,
-    USA_ROADS,
-    RANDOM_N,
-    RANDOM_2N,
-    RANDOM_NSQRT,*/
-    TWITTER,
-    STANFORD_WEB/*,*/
-    //RANDOM_DIVIDED
+    // RANDOM_NLOG,
+    // USA_ROADS,
+    // RANDOM_N,
+    // RANDOM_2N,
+    // RANDOM_NSQRT,
+    // TWITTER,
+    // STANFORD_WEB,
+    // RANDOM_DIVIDED,
+    // KRON_15,
+    KRON_13
 }
 
 fun loadGraph(params: Triple<String, String, String>): Graph {
@@ -53,47 +59,57 @@ interface GraphServerInterface : Remote {
 }
 
 class GraphServer : UnicastRemoteObject(), GraphServerInterface {
-    override fun graphByParams(params: GraphParams) = when (params) {
-/*        GraphParams.RANDOM_DIVIDED -> {
-            if (!::RANDOM_DIVIDED_GRAPH.isInitialized)
-                RANDOM_DIVIDED_GRAPH = loadGraph(RANDOM_DIVIDED_GRAPH_PARAMS)
-            RANDOM_DIVIDED_GRAPH
+    override fun graphByParams(params: GraphParams) =   when (params) {
+        // GraphParams.RANDOM_DIVIDED -> {
+        //     if (!::RANDOM_DIVIDED_GRAPH.isInitialized)
+        //         RANDOM_DIVIDED_GRAPH = loadGraph(RANDOM_DIVIDED_GRAPH_PARAMS)
+        //     RANDOM_DIVIDED_GRAPH
+        // }
+        // GraphParams.USA_ROADS -> {
+        //     if (!::USA_ROADS_GRAPH.isInitialized)
+        //         USA_ROADS_GRAPH = loadGraph(USA_ROADS_GRAPH_PARAMS)
+        //     USA_ROADS_GRAPH
+        // }
+        // GraphParams.RANDOM_N -> {
+        //     if (!::RANDOM_N_GRAPH.isInitialized)
+        //         RANDOM_N_GRAPH = loadGraph(RANDOM_N_GRAPH_PARAMS)
+        //     RANDOM_N_GRAPH
+        // }
+        // GraphParams.RANDOM_2N -> {
+        //     if (!::RANDOM_2N_GRAPH.isInitialized)
+        //         RANDOM_2N_GRAPH = loadGraph(RANDOM_2N_GRAPH_PARAMS)
+        //     RANDOM_2N_GRAPH
+        // }
+        // GraphParams.RANDOM_NLOG -> {
+        //     if (!::RANDOM_NLOG_GRAPH.isInitialized)
+        //         RANDOM_NLOG_GRAPH = loadGraph(RANDOM_NLOG_GRAPH_PARAMS)
+        //     RANDOM_NLOG_GRAPH
+        // }
+        // GraphParams.RANDOM_NSQRT -> {
+        //     if (!::RANDOM_NSQRT_GRAPH.isInitialized)
+        //         RANDOM_NSQRT_GRAPH = loadGraph(RANDOM_NSQRT_GRAPH_PARAMS)
+        //     RANDOM_NSQRT_GRAPH
+        // }
+        // GraphParams.TWITTER -> {
+        //     if (!::TWITTER_GRAPH.isInitialized)
+        //         TWITTER_GRAPH = loadGraph(TWITTER_GRAPH_PARAMS)
+        //     TWITTER_GRAPH
+        // }
+        // GraphParams.STANFORD_WEB -> {
+        //     if (!::STANFORD_WEB_GRAPH.isInitialized)
+        //         STANFORD_WEB_GRAPH = loadGraph(STANFORD_WEB_GRAPH_PARAMS)
+        //     STANFORD_WEB_GRAPH
+        // }
+        GraphParams.KRON_13 -> {
+            if (!::KRON_13_GRAPH.isInitialized)
+                KRON_13_GRAPH = loadGraph(KRON_13_GRAPH_PARAMS)
+            KRON_13_GRAPH
         }
-        GraphParams.USA_ROADS -> {
-            if (!::USA_ROADS_GRAPH.isInitialized)
-                USA_ROADS_GRAPH = loadGraph(USA_ROADS_GRAPH_PARAMS)
-            USA_ROADS_GRAPH
-        }
-        GraphParams.RANDOM_N -> {
-            if (!::RANDOM_N_GRAPH.isInitialized)
-                RANDOM_N_GRAPH = loadGraph(RANDOM_N_GRAPH_PARAMS)
-            RANDOM_N_GRAPH
-        }
-        GraphParams.RANDOM_2N -> {
-            if (!::RANDOM_2N_GRAPH.isInitialized)
-                RANDOM_2N_GRAPH = loadGraph(RANDOM_2N_GRAPH_PARAMS)
-            RANDOM_2N_GRAPH
-        }
-        GraphParams.RANDOM_NLOG -> {
-            if (!::RANDOM_NLOG_GRAPH.isInitialized)
-                RANDOM_NLOG_GRAPH = loadGraph(RANDOM_NLOG_GRAPH_PARAMS)
-            RANDOM_NLOG_GRAPH
-        }
-        GraphParams.RANDOM_NSQRT -> {
-            if (!::RANDOM_NSQRT_GRAPH.isInitialized)
-                RANDOM_NSQRT_GRAPH = loadGraph(RANDOM_NSQRT_GRAPH_PARAMS)
-            RANDOM_NSQRT_GRAPH
-        }*/
-        GraphParams.TWITTER -> {
-            if (!::TWITTER_GRAPH.isInitialized)
-                TWITTER_GRAPH = loadGraph(TWITTER_GRAPH_PARAMS)
-            TWITTER_GRAPH
-        }
-        GraphParams.STANFORD_WEB -> {
-            if (!::STANFORD_WEB_GRAPH.isInitialized)
-                STANFORD_WEB_GRAPH = loadGraph(STANFORD_WEB_GRAPH_PARAMS)
-            STANFORD_WEB_GRAPH
-        }
+        // GraphParams.KRON_15 -> {
+        //     if (!::KRON_15_GRAPH.isInitialized)
+        //         KRON_15_GRAPH = loadGraph(KRON_15_GRAPH_PARAMS)
+        //     KRON_15_GRAPH
+        // }
     }
 
     companion object {
